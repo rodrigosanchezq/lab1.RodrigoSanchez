@@ -1,8 +1,8 @@
 package csd230.lab1.entities;
 
 import jakarta.persistence.*;
-
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -12,13 +12,9 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // linkedhashset for NO duplicate items
+    // LinkedHashSet for NO duplicate items
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CartItem> items = new LinkedHashSet<>();
-
-    public Set<CartItem> getItems() {
-        return items;
-    }
 
     public Cart() {
     }
@@ -35,12 +31,37 @@ public class Cart {
     public void setId(Long id) {
         this.id = id;
     }
+
     public void addItem(CartItem item) {
         item.setCart(this);
         items.add(item);
     }
 
+    public Set<CartItem> getItems() {
+        return items;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", items=" + (items != null ? items.size() + " items" : "No items") +
+                '}';
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cart cart = (Cart) o;
+        return Objects.equals(id, cart.id);
     }
 }

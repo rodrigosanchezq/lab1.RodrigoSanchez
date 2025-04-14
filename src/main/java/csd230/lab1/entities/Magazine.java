@@ -6,6 +6,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class Magazine extends Publication {
@@ -15,24 +16,13 @@ public class Magazine extends Publication {
     @Column(name = "curr_issue")
     private Date currIssue;
 
-    @Column(name = "title")
-    private String title;
+    public Magazine() { }
 
-    @Column(name = "copies", nullable = false)
-    private int copies;
-
-    @Column(name = "price", nullable = false)
-    private double price;
-
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-
-    @Column(name = "description")
-    private String description;
-
-    @ManyToOne
-    @JoinColumn
-    private Cart cart;
+    public Magazine(double price, int quantity, String description, String title, int copies, int orderQty, Date currIssue) {
+        super(title, copies, price, quantity, description);
+        this.orderQty = orderQty;
+        this.currIssue = currIssue;
+    }
 
     public int getOrderQty() {
         return orderQty;
@@ -50,52 +40,25 @@ public class Magazine extends Publication {
         this.currIssue = currIssue;
     }
 
-    public String getTitle() {
-        return title;
+
+    @Override
+    public String toString() {
+        return "Magazine{" +
+                "orderQty=" + orderQty +
+                ", currIssue=" + currIssue +
+                "} " + super.toString();
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Magazine magazine)) return false;
+        if (!super.equals(o)) return false;
+        return getOrderQty() == magazine.getOrderQty() && Objects.equals(getCurrIssue(), magazine.getCurrIssue());
     }
 
-    public int getCopies() {
-        return copies;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getOrderQty(), getCurrIssue());
     }
-
-    public void setCopies(int copies) {
-        this.copies = copies;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
 }

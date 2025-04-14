@@ -2,26 +2,22 @@ package csd230.lab1.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
+import java.util.Objects;
+
 
 @Entity
 public class Ticket extends CartItem {
     @Column(name = "text")
     private String text;
 
-    @Column(name = "price", nullable = false)
-    private double price;
+    public Ticket() {
+    }
 
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-
-    @Column(name = "description")
-    private String description;
-
-    @ManyToOne
-    @JoinColumn
-    private Cart cart;
+    public Ticket(String text, double price, int quantity, String description) {
+        super(price, quantity, description);
+        this.text = text;
+    }
 
     public String getText() {
         return text;
@@ -31,36 +27,23 @@ public class Ticket extends CartItem {
         this.text = text;
     }
 
-    public double getPrice() {
-        return price;
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "text='" + text + '\'' +
+                "} " + super.toString();
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ticket that)) return false;
+        if (!super.equals(that)) return false;
+        return Objects.equals(text, that.getText());
     }
 
-    public int getQuantity() {
-        return quantity;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), text);
     }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
 }

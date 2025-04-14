@@ -17,6 +17,20 @@ public class Book extends Publication {
         this.ISBN = ISBN;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    public String getISBN() {
+        return ISBN;
+    }
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+
     @Override
     public String toString() {
         return "Book{" +

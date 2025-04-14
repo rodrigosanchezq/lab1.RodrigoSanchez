@@ -16,4 +16,13 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
     @Query ("SELECT c FROM CartItem c")
     List<CartItem> findAll();
+
+    /**
+     * Find all CartItem entities with a specific quantity.
+     *
+     * @param quantity the quantity to search for
+     * @return a list of CartItem entities with the specified quantity
+     */
+    @Query ("SELECT c FROM CartItem c WHERE c.quantity = ?1")
+    List<CartItem> findByQuantity(int quantity);
 }

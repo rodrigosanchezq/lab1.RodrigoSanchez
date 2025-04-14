@@ -6,36 +6,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class DiscMag extends Magazine {
     @Column(name = "has_disc", nullable = false)
     private boolean hasDisc;
 
-    @Column(name = "order_qty", nullable = false)
-    private int orderQty;
+    public DiscMag() {}
 
-    @Column(name = "curr_issue")
-    private Date currIssue;
-
-    @Column(name = "title")
-    private String title;
-
-    @Column(name = "copies", nullable = false)
-    private int copies;
-
-    @Column(name = "price", nullable = false)
-    private double price;
-
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
-
-    @Column(name = "description")
-    private String description;
-
-    @ManyToOne
-    @JoinColumn
-    private Cart cart;
+    public DiscMag (boolean hasDisc, double price, int quantity, String description, String title, int copies, int orderQty, Date currIssue) {
+        super(price, quantity, description, title, copies, orderQty, currIssue);
+        this.hasDisc = hasDisc;
+    }
 
     public boolean getHasDisc() {
         return hasDisc;
@@ -45,68 +28,24 @@ public class DiscMag extends Magazine {
         this.hasDisc = hasDisc;
     }
 
-    public int getOrderQty() {
-        return orderQty;
+    @Override
+    public String toString() {
+        return "DiscMag{" +
+                "hasDisc=" + hasDisc +
+                "} " + super.toString();
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DiscMag discMag)) return false;
+        if (!super.equals(o)) return false;
+        return getHasDisc() == discMag.getHasDisc();
     }
 
-    public void setOrderQty(int orderQty) {
-        this.orderQty = orderQty;
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getHasDisc());
     }
 
-    public Date getCurrIssue() {
-        return currIssue;
-    }
-
-    public void setCurrIssue(Date currIssue) {
-        this.currIssue = currIssue;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getCopies() {
-        return copies;
-    }
-
-    public void setCopies(int copies) {
-        this.copies = copies;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
 
 }

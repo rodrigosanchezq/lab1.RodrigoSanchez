@@ -14,4 +14,9 @@ public interface DiscMagRepository extends JpaRepository<DiscMag, Long> {
      */
      @Query("SELECT d FROM DiscMag d")
      List<DiscMag> findAll();
+
+     List<DiscMag> findByPriceBetween(double low, double high);
+
+     @Query ("SELECT d FROM DiscMag d WHERE d.hasDisc = ?1")
+        List<DiscMag> findByHasDisc(boolean hasDisc);
 }

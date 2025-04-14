@@ -2,6 +2,8 @@ package csd230.lab1.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "cart_item")
 public class CartItem {
@@ -71,5 +73,33 @@ public class CartItem {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "id=" + id +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", description='" + description + '\'' +
+                ", cart=" + cart +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartItem cartItem = (CartItem) o;
+        return Double.compare(cartItem.price, price) == 0 &&
+                quantity == cartItem.quantity &&
+                Objects.equals(id, cartItem.id) &&
+                Objects.equals(description, cartItem.description) &&
+                Objects.equals(cart, cartItem.cart);
     }
 }
