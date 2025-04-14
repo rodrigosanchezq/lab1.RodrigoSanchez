@@ -1,0 +1,115 @@
+/**
+ Author : Rodrigo Sanchez
+ Date : January 18th, 2025
+ Description : POJO's UML Diagram
+ **/
+
+@startuml
+interface SaleableItem {
+    + void sellItem()
+    + double getPrice()
+}
+
+
+abstract class Publication {
+    - String title
+    - int copies
+    + Publication()
+    + Publication(double price, int quantity, String description, Cart cart, String title, int copies)
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    + void sellItem()
+    + String getTitle()
+    + void setTitle(String title)
+    + int getCopies()
+    + void setCopies(int copies)
+}
+
+Publication --|> CartItem
+Publication ..|> Serializable
+
+class Book {
+    - String author
+    - String ISBN
+    + Book()
+    + Book(double price, int quantity, String description, Cart cart, String title, int copies, String author, String ISBN)
+}
+
+Book --|> Publication
+
+class Magazine {
+    - int orderQty
+    - Date currIssue
+    + Magazine()
+    + Magazine(double price, int quantity, String description, Cart cart, String title, int copies, int orderQty, Date currIssue)
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    + int getOrderQty()
+    + void setOrderQty(int orderQty)
+    + Date getCurrIssue()
+    + void setCurrIssue(Date currIssue)
+}
+
+Magazine --|> Publication
+
+class DiscMag {
+    - boolean hasDisc
+    + DiscMag()
+    + DiscMag (double price, int quantity, String description, Cart cart, String title, int copies, int orderQty, Date currIssue, boolean hasDisc)
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    + boolean getHasDisc()
+    + void setHasDisc(boolean hasDisc)
+}
+
+DiscMag --|> Magazine
+
+class Ticket {
+    - String text
+    + Ticket()
+    + String getText()
+    + void setText(String text)
+    + void sellItem()
+}
+
+Ticket --|> CartItem
+
+class CartItem {
+    - double price
+    - int quantity
+    - String description
+    - Cart cart
+    + CartItem()
+    + CartItem(double price, int quantity, String description, Cart cart)
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    + double getPrice()
+    + void setPrice(double price)
+    + int getQuantity()
+    + void setQuantity(int quantity)
+    + String getDescription()
+    + void setDescription(String description)
+    + Cart getCart()
+    + void setCart(Cart cart)
+}
+
+CartItem ..|> SaleableItem
+CartItem ..|> Serializable
+
+class Cart {
+    - List<CartItem> items
+    + Cart()
+    + Cart(List<CartItem> items)
+    + void addItem(CartItem item)
+    + List<CartItem> getItems()
+    + void setItems(List<CartItem> items)
+    + boolean equals(Object o)
+    + int hashCode()
+    + String toString()
+    }
+
+@enduml
