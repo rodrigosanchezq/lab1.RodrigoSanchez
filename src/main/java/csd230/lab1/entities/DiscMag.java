@@ -1,16 +1,13 @@
 package csd230.lab1.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 public class DiscMag extends Magazine {
-    @Column(name = "has_disc", nullable = false)
+    @Column(name = "has_disc", nullable = true)
     private boolean hasDisc;
 
     public DiscMag() {}

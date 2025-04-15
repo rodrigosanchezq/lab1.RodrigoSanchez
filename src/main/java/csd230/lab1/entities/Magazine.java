@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 public class Magazine extends Publication {
-    @Column(name = "order_qty", nullable = false)
+    @Column(name = "order_qty", nullable = true)
     private int orderQty;
 
     @Column(name = "curr_issue")

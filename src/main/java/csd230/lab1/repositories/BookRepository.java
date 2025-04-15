@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    // This method will find books by their isbn number and return them as a list
-    List<Book> findByIsbn(String isbn);
+    // This method will find books by their ISBN and return them as a list
+    List<Book> findByISBN(String isbn);
 
     // This method will find books by their id and return them as a single object
     Book findById(long id);

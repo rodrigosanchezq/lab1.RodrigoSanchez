@@ -10,7 +10,7 @@ public class Publication extends CartItem {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "copies", nullable = false)
+    @Column(name = "copies", nullable = true)
     private int copies;
 
     public Publication() {

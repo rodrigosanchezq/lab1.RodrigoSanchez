@@ -13,6 +13,5 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
      *
      * @return a list of all Cart entities
      */
-    @Query( "SELECT c FROM Cart WHERE c.id = :idi")
-    List<Cart> findById();
+    List<Cart> findAll();
 }

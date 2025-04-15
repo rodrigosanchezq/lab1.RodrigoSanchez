@@ -124,7 +124,7 @@ public class Application {
 		String isbn = book.getISBN();
 		log.info("BookEntities found with findByIsbn('" + isbn + "'):");  // Querying by ISBN
 		log.info("--------------------------------------------");
-		List<Book> booksByIsbn = bookRepository.findByIsbn(isbn);
+		List<Book> booksByIsbn = bookRepository.findByISBN(isbn);
 		booksByIsbn.forEach(b -> {
 			log.info(b.toString());
 		});

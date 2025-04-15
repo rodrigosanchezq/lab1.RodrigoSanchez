@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ApplicationTests {
@@ -80,7 +79,7 @@ class ApplicationTests {
 	}
 
 	@Test
-	void UpdateBook() {
+	void testUpdateBook() {
 		// Test Update
 		book.setPrice(25.99);
 		bookRepository.save(book);
@@ -91,7 +90,7 @@ class ApplicationTests {
 	}
 
 	@Test
-	void UpdateMagazine() {
+	void testUpdateMagazine() {
 		// Test Update
 		magazine.setPrice(25.99);
 		magazineRepository.save(magazine);
@@ -102,18 +101,18 @@ class ApplicationTests {
 	}
 
 	@Test
-	void DeleteBook() {
+	void testDeleteBook() {
 		// Test Delete
 		bookRepository.deleteById(book.getId());
 		Book deletedBook = bookRepository.findById(book.getId()).orElse(null);
-		assertNotNull(deletedBook);
+		assertNull(deletedBook);
 	}
 
 	@Test
-	void DeleteMagazine() {
+	void testDeleteMagazine() {
 		// Test Delete
 		magazineRepository.deleteById(magazine.getId());
 		Magazine deletedMagazine = magazineRepository.findById(magazine.getId()).orElse(null);
-		assertNotNull(deletedMagazine);
+		assertNull(deletedMagazine);
 	}
 }

@@ -12,7 +12,6 @@ public class CartItem {
     @Column(name = "id", nullable = false)
     private Long id;
 
-
     @Column(name = "price", nullable = true)
     private double price;
 
@@ -82,7 +81,7 @@ public class CartItem {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", description='" + description + '\'' +
-                ", cart=" + cart +
+                ", cart=" + (cart != null ? cart.getId() : "null") +
                 '}';
     }
 
@@ -96,10 +95,6 @@ public class CartItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CartItem cartItem = (CartItem) o;
-        return Double.compare(cartItem.price, price) == 0 &&
-                quantity == cartItem.quantity &&
-                Objects.equals(id, cartItem.id) &&
-                Objects.equals(description, cartItem.description) &&
-                Objects.equals(cart, cartItem.cart);
+        return Objects.equals(id, cartItem.id);
     }
 }
